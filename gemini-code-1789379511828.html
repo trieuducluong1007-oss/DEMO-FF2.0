@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,700;0,800;0,900;1,900&amp;family=JetBrains+Mono:wght@400;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <style>
+        @layer base { 
+            html, body { margin: 0; padding: 0; } 
+            body { overscroll-behavior: none; } 
+            main > :first-child { margin-top: 0 !important; } 
+            main > :last-child { margin-bottom: 0 !important; } 
+        } 
+        ::-webkit-scrollbar { display: none; } 
+        @keyframes pulse-fast { 
+            0%, 100% { opacity: 1; } 
+            50% { opacity: 0.3; } 
+        } 
+        .animate-alert { animation: pulse-fast 1.2s infinite; }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = { 
+            darkMode: 'class', 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        'tertiary-container': '#ca8100', 'inverse-on-surface': '#233143', 'on-secondary-fixed': '#002113', 'surface-variant': '#273647', 'on-error-container': '#ffdad6', 'on-surface-variant': '#e7bcbb', 'on-surface': '#d4e4fa', 'on-tertiary-container': '#3e2400', 'tertiary': '#ffb95f', 'surface-container-highest': '#273647', 'on-background': '#d4e4fa', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#ffb3b1', 'secondary-fixed': '#6ffbbe', 'error': '#ffb4ab', 'on-secondary-fixed-variant': '#005236', 'on-primary-fixed-variant': '#92001d', 'surface-bright': '#2c3a4c', 'on-error': '#690005', 'surface': '#051424', 'tertiary-fixed-dim': '#ffb95f', 'secondary-fixed-dim': '#4edea3', 'surface-dim': '#051424', 'on-primary-container': '#5b000e', 'on-primary': '#680011', 'error-container': '#93000a', 'surface-container-lowest': '#010f1f', 'primary': '#ffb3b1', 'inverse-primary': '#bf0029', 'on-secondary-container': '#00311f', 'surface-container-high': '#1c2b3c', 'surface-container': '#122131', 'background': '#051424', 'outline': '#ae8786', 'on-tertiary-fixed-variant': '#653e00', 'primary-fixed': '#ffdad8', 'on-primary-fixed': '#410007', 'primary-fixed-dim': '#ffb3b1', 'inverse-surface': '#d4e4fa', 'primary-container': '#ff525b', 'secondary-container': '#00a572', 'on-secondary': '#003824', 'secondary': '#4edea3', 'surface-container-low': '#0d1c2d', 'on-tertiary': '#472a00', 'outline-variant': '#5d3f3e', 'tertiary-fixed': '#ffddb8' 
+                    }, 
+                    borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, 
+                    spacing: { 'gutter-desktop': '1.5rem', 'space-sm': '0.5rem', 'space-xl': '2.5rem', 'margin-desktop': '2rem', 'space-md': '1rem', 'gutter': '1rem', 'margin': '1rem', 'space-xs': '0.25rem', 'space-lg': '1.5rem' }, 
+                    fontFamily: { 'display-hero': ['Chivo'], 'label-mono': ['JetBrains Mono'], 'headline-lg': ['Chivo'], 'body-sm': ['Space Grotesk'], 'headline-md': ['Chivo'], 'body-lg': ['Space Grotesk'], 'body-md': ['Space Grotesk'], 'metric-numeral-lg': ['JetBrains Mono'], 'headline-lg-mobile': ['Chivo'], 'headline-sm': ['Chivo'], 'metric-numeral-md': ['JetBrains Mono'], 'label-code': ['JetBrains Mono'] }, 
+                    fontSize: { 'display-hero': ['56px', { lineHeight: '64px', letterSpacing: '-0.04em', fontWeight: '900' }], 'label-mono': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '600' }], 'headline-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-sm': ['12px', { lineHeight: '18px', fontWeight: '400' }], 'headline-md': ['24px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-lg': ['16px', { lineHeight: '24px', fontWeight: '500' }], 'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }], 'metric-numeral-lg': ['32px', { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-lg-mobile': ['28px', { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-sm': ['18px', { lineHeight: '26px', letterSpacing: '-0.01em', fontWeight: '700' }], 'metric-numeral-md': ['20px', { lineHeight: '26px', letterSpacing: '-0.01em', fontWeight: '600' }], 'label-code': ['10px', { lineHeight: '12px', letterSpacing: '0.04em', fontWeight: '400' }] } 
+                } 
+            } 
+        };
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface relative min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center opacity-10 filter blur-sm scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1VjonWkE8cQWSMdN948LpD-Kv1LlLapmm4BqhdUeusA93FtHK5gWVPDI77-bYjE5Idj5D3rEQt5UCUZPXp3atoeuESfcHxQQ3nnP0bvdAH83rq5lqMJSJTyxnYCx0veq5DZxxlJ_SdpBVEXeTyhpwr2nd5WM1xBHMH9A0-FhBjeuEVu2kyi8Nblo9aCsCNvemorgPji5oBRudlV0xUxCFAXXYH6j360yvzy9eRMSe-izR_IEYRNLC8fSQ');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/90 to-surface-container-lowest/80"></div>
+        <div class="absolute inset-0 shadow-[inset_0_0_120px_rgba(1,15,31,0.95)]"></div>
+    </div>
+    
+    <header class="fixed top-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+        <div class="h-20 w-full px-margin-desktop flex flex-col justify-between py-space-xs">
+            <div class="flex items-center justify-between gap-gutter">
+                <div class="flex items-center gap-space-md">
+                    <div class="flex items-center gap-space-xs">
+                        <span class="w-2 h-2 rounded-full bg-error animate-alert ring-2 ring-error/40"></span>
+                        <span class="font-headline-sm text-headline-sm text-primary uppercase tracking-tight">FREE FALL 2.0</span>
+                        <span class="text-outline font-label-mono text-label-mono tracking-widest">/</span>
+                        <span class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-wider">KOREAN CASCADE</span>
+                    </div>
+                    <div class="hidden xl:flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-high/80 text-on-surface-variant font-label-code text-label-code">
+                        <span class="material-symbols-outlined text-sm text-primary">terminal</span>
+                        <span>SESSION:</span>
+                        <span class="text-primary font-label-mono text-label-mono">#KR-2026-MC89</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-space-lg font-label-mono text-label-mono bg-surface-container-low/70 px-space-md py-1 rounded shadow-inner">
+                    <div class="flex items-center gap-space-xs">
+                        <span class="text-on-surface-variant">KOSPI 200</span>
+                        <span class="text-error font-metric-numeral-md text-body-sm">2,104.20 ▼ -8.94%</span>
+                    </div>
+                    <div class="w-px h-3 bg-surface-variant"></div>
+                    <div class="flex items-center gap-space-xs">
+                        <span class="text-on-surface-variant">USD/KRW</span>
+                        <span class="text-secondary font-metric-numeral-md text-body-sm">1,498.80 ▲ +4.12%</span>
+                    </div>
+                    <div class="w-px h-3 bg-surface-variant"></div>
+                    <div class="flex items-center gap-space-xs">
+                        <span class="text-on-surface-variant">KTB 3Y</span>
+                        <span class="text-tertiary font-metric-numeral-md text-body-sm">4.82% ▲</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-space-md">
+                    <button class="flex items-center justify-center p-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Audio Feed" type="button">
+                        <span class="material-symbols-outlined text-body-md">volume_up</span>
+                    </button>
+                    <button class="px-space-sm py-1 rounded bg-surface-container font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Language Switch" type="button">KR/EN</button>
+                    <img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary-container/40" src="https://lh3.googleusercontent.com/aida/AEtjO1VjonWkE8cQWSMdN948LpD-Kv1LlLapmm4BqhdUeusA93FtHK5gWVPDI77-bYjE5Idj5D3rEQt5UCUZPXp3atoeuESfcHxQQ3nnP0bvdAH83rq5lqMJSJTyxnYCx0veq5DZxxlJ_SdpBVEXeTyhpwr2nd5WM1xBHMH9A0-FhBjeuEVu2kyi8Nblo9aCsCNvemorgPji5oBRudlV0xUxCFAXXYH6j360yvzy9eRMSe-izR_IEYRNLC8fSQ">
+                </div>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+                <nav class="flex items-center gap-space-xs" id="nav-header-links">
+                    <a class="nav-link px-space-md py-1 tracking-wider uppercase transition-all bg-primary-container text-on-primary-container font-bold rounded" data-target="title" href="#" aria-current="page">01. TITLE &amp; DOSSIER</a>
+                    <a class="nav-link px-space-md py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-mono text-label-mono tracking-wider uppercase transition-all rounded" data-target="rules" href="#">02. 6-PHASE CYCLE</a>
+                    <a class="nav-link px-space-md py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-mono text-label-mono tracking-wider uppercase transition-all rounded" data-target="tutorial" href="#">03. COCKPIT TUTORIAL</a>
+                    <a class="nav-link px-space-md py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-mono text-label-mono tracking-wider uppercase transition-all rounded" data-target="gameplay" href="#">04. PHASE 1 GAMEPLAY</a>
+                </nav>
+                <div class="hidden lg:flex items-center gap-space-xs font-label-code text-label-code text-on-surface-variant">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+                    <span>SEC_CLEARANCE: LEVEL_4 COCKPIT</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 w-full pt-20 px-margin-desktop min-h-screen">
+        <div class="flex flex-col w-full">
+            <!-- MAIN COCKPIT ROUTER CONTAINER -->
+            <div class="w-full relative flex flex-col font-body-md text-on-surface overflow-hidden select-none" id="cockpit-viewport">
+                
+                <!-- SUB-VIEW 1: TITLE SCREEN -->
+                <div class="w-full min-h-[calc(100vh-5.5rem)] flex flex-col justify-between p-space-lg relative transition-all duration-300" id="view-title">
+                    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-25 filter blur-[2px] scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1UXtXjgn_fSrhQFcyNn0_G68y2_Ytx4kk7zPtyJFy8z46GUGooZWh-fyHMaRHitWRFncBrvyRKQEHhoTaBQdPIjHsUPR8xU3AcFUOpxkBpYxXQ-SndIC1KERRcfk04cmFtTzLY_t0vd9gJ9QQ-ZrJ1sOI7bq5yL43-2pA1OdQha5WdnWoOjHGVZNYJxQ7UetiB-WSKOZ55nBwV2ouaBPuPtn_zWN_Nh7KuU4LJY1xC2A8BUIMH9D51ogQ');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-surface-container-lowest/80"></div>
+                        <div class="absolute inset-0 shadow-[inset_0_0_140px_rgba(1,15,31,0.98)]"></div>
+                    </div>
+                    <!-- Top Header Telemetry Strip -->
+                    <div class="relative z-10 flex flex-wrap items-center justify-between gap-space-md p-space-sm bg-surface-container-lowest/80 backdrop-blur-md rounded shadow-md">
+                        <div class="flex items-center gap-space-md">
+                            <div class="flex items-center gap-space-xs font-label-mono text-label-mono text-primary px-space-sm py-1 bg-primary-container/20 rounded">
+                                <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                                <span>#KR-SESSION: 2026-MC89</span>
+                            </div>
+                            <span class="text-surface-variant font-label-mono">|</span>
+                            <span class="font-label-mono text-label-mono text-on-surface-variant tracking-wider">CLEARANCE: PROTOCOL ZERO</span>
+                        </div>
+                        <div class="flex items-center gap-space-lg font-label-mono text-label-mono">
+                            <div><span class="text-on-surface-variant">KOSPI 200:</span> <span class="text-error font-bold">2,104.20 (-8.94%)</span></div>
+                            <div><span class="text-on-surface-variant">USD/KRW:</span> <span class="text-secondary font-bold">1,498.80 (+4.12%)</span></div>
+                            <div><span class="text-on-surface-variant">KTB 3Y:</span> <span class="text-tertiary font-bold">4.82% (+38bp)</span></div>
+                        </div>
+                    </div>
+                    <!-- Center Hero Display -->
+                    <div class="relative z-10 flex flex-col items-center justify-center text-center my-auto py-space-xl max-w-5xl mx-auto">
+                        <div class="inline-flex items-center gap-space-xs px-space-md py-1 mb-space-md rounded-full bg-error-container/40 text-primary font-label-mono text-label-mono tracking-widest uppercase animate-alert">
+                            <span class="material-symbols-outlined text-sm">warning</span> BANK OF KOREA CALLS EMERGENCY RATE SUMMIT // COLLATERAL COLLAPSE
+                        </div>
+                        <h1 class="font-display-hero text-display-hero text-transparent bg-clip-text bg-gradient-to-b from-on-surface via-inverse-surface to-on-surface-variant drop-shadow-2xl uppercase tracking-tighter"> FREE FALL </h1>
+                        <div class="font-headline-lg text-headline-lg text-primary-container font-extrabold tracking-tight -mt-2 mb-space-md drop-shadow-[0_0_20px_rgba(255,82,91,0.5)]"> 2.0 · KOREAN CASCADE </div>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-space-xl leading-relaxed"> “원화 폭락과 마진콜 연쇄 도미노...” Can you survive the Yeouido forced liquidation cascade before your retail equity balance hits absolute zero? </p>
+                        <!-- Consolidated Primary CTA Launcher -->
+                        <div class="flex items-center justify-center">
+                            <button class="group relative px-space-xl py-space-md bg-primary-container hover:bg-inverse-primary text-on-primary font-label-mono text-headline-sm uppercase tracking-widest rounded shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center gap-space-sm cursor-pointer shadow-[0_0_30px_rgba(255,82,91,0.45)]" id="btn-begin-crisis">
+                                <span>BEGIN CRISIS RUN</span>
+                                <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Bottom Auxiliary Protocol Dock -->
+                    <div class="relative z-10 flex flex-wrap items-center justify-between gap-space-md pt-space-md border-t-0 bg-surface-container-low/60 backdrop-blur-md p-space-sm rounded">
+                        <div class="flex items-center gap-space-md font-label-code text-label-code text-on-surface-variant">
+                            <span class="text-secondary font-bold">SYSTEM READY</span>
+                            <span>•</span>
+                            <span>LATENCY: 8ms TO KRX MATCHING ENGINE</span>
+                            <span>•</span>
+                            <span>ENGINE: DISLOCATED CASCADE SIMULATOR</span>
+                        </div>
+                        <div class="flex items-center gap-space-sm font-label-mono text-label-mono">
+                            <span class="text-on-surface-variant">PRESS [SPACEBAR] TO INITIALIZE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB-VIEW 2: MISSION DOSSIER & MECHANICS -->
+                <div class="w-full min-h-[calc(100vh-5.5rem)] flex flex-col justify-between p-space-lg relative transition-all duration-300 hidden" id="view-dossier">
+                    <!-- Dossier Header -->
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md pb-space-md bg-surface-container-low p-space-md rounded">
+                        <div>
+                            <div class="flex items-center gap-space-xs font-label-mono text-label-mono text-secondary mb-1">
+                                <span class="material-symbols-outlined text-xs">folder_open</span>
+                                <span>01. OPERATIONAL BRIEFING // DEBRIEF ARCHIVE</span>
+                            </div>
+                            <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight"> THE ANATOMY OF FORCED LIQUIDATION </h2>
+                        </div>
+                        <div class="flex items-center gap-space-sm">
+                            <button class="px-space-md py-1.5 rounded bg-surface-container hover:bg-surface-container-high font-label-mono text-label-mono text-on-surface-variant uppercase cursor-pointer" id="btn-dossier-back"> ← TITLE CONSOLE </button>
+                        </div>
+                    </div>
+                    <!-- Core Specs Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-space-md my-space-md">
+                        <div class="bg-surface-container-high/90 p-space-md rounded flex flex-col justify-between shadow-sm">
+                            <span class="font-label-mono text-label-mono text-on-surface-variant uppercase">Initial Capital</span>
+                            <span class="font-metric-numeral-lg text-metric-numeral-lg text-secondary my-1">₩100,000,000</span>
+                            <span class="font-label-code text-label-code text-on-surface-variant">Retail base seed account</span>
+                        </div>
+                        <div class="bg-surface-container-high/90 p-space-md rounded flex flex-col justify-between shadow-sm">
+                            <span class="font-label-mono text-label-mono text-on-surface-variant uppercase">Target Residence</span>
+                            <span class="font-metric-numeral-lg text-metric-numeral-lg text-tertiary my-1">₩1,800,000,000</span>
+                            <span class="font-label-code text-label-code text-on-surface-variant">Seoul Mapo/Gangnam Goal</span>
+                        </div>
+                        <div class="bg-surface-container-high/90 p-space-md rounded flex flex-col justify-between shadow-sm">
+                            <span class="font-label-mono text-label-mono text-on-surface-variant uppercase">Max Margin Leverage</span>
+                            <span class="font-metric-numeral-lg text-metric-numeral-lg text-primary my-1">10.0x CROSS</span>
+                            <span class="font-label-code text-label-code text-on-surface-variant">Unregulated broker tranche</span>
+                        </div>
+                        <div class="bg-surface-container-high/90 p-space-md rounded flex flex-col justify-between shadow-sm">
+                            <span class="font-label-mono text-label-mono text-error uppercase">Liquidation Sweep</span>
+                            <span class="font-metric-numeral-lg text-metric-numeral-lg text-error my-1">&lt; 30% HEALTH</span>
+                            <span class="font-label-code text-label-code text-on-error-container">Forced market execution trigger</span>
+                        </div>
+                    </div>
+                    <!-- Mechanics Pipeline Cards -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md flex-1">
+                        <!-- Pipeline Node 1-3 -->
+                        <div class="bg-surface-container-low/70 backdrop-blur-md p-space-md rounded flex flex-col justify-between space-y-space-md">
+                            <div class="flex items-center justify-between">
+                                <span class="font-label-mono text-label-mono text-secondary uppercase font-bold">PIPELINE PHASE A</span>
+                                <span class="material-symbols-outlined text-on-surface-variant text-sm">hub</span>
+                            </div>
+                            <div class="space-y-space-sm">
+                                <div class="p-space-sm rounded bg-surface-container">
+                                    <span class="font-label-mono text-label-mono text-primary uppercase">NODE 01: INTEL &amp; WIRES</span>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">High-frequency Korean economic leaks, retail forum sentiment shifts, and foreign hedge fund unwinding.</p>
+                                </div>
+                                <div class="p-space-sm rounded bg-surface-container">
+                                    <span class="font-label-mono text-label-mono text-secondary uppercase">NODE 02: STRATEGIC SIZING</span>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Allocation across Samsung, SK Hynix, and high-beta 2X inverse/leveraged structural notes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pipeline Node 3-4 -->
+                        <div class="bg-surface-container-low/70 backdrop-blur-md p-space-md rounded flex flex-col justify-between space-y-space-md">
+                            <div class="flex items-center justify-between">
+                                <span class="font-label-mono text-label-mono text-tertiary uppercase font-bold">PIPELINE PHASE B</span>
+                                <span class="material-symbols-outlined text-on-surface-variant text-sm">analytics</span>
+                            </div>
+                            <div class="space-y-space-sm">
+                                <div class="p-space-sm rounded bg-surface-container">
+                                    <span class="font-label-mono text-label-mono text-tertiary uppercase">NODE 03: DEBT ACCUMULATION</span>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Margin loans compound every tick. Overleveraged bets require continuous equity cushion replenishment.</p>
+                                </div>
+                                <div class="p-space-sm rounded bg-surface-container">
+                                    <span class="font-label-mono text-label-mono text-on-surface uppercase">NODE 04: TELEMETRY DELTA</span>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Real-time KOSPI mark-to-market calculations running against T+0.5 settlement latency.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pipeline Node 5-6 with Visual Image Desk -->
+                        <div class="bg-surface-container-low/70 backdrop-blur-md p-space-md rounded flex flex-col justify-between relative overflow-hidden">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-label-mono text-label-mono text-error uppercase font-bold">CASCADE TRIGGER</span>
+                                <span class="px-space-xs py-0.5 rounded bg-error-container text-on-error-container font-label-code text-label-code uppercase">CRITICAL PATH</span>
+                            </div>
+                            <div class="relative w-full h-28 rounded overflow-hidden mb-2">
+                                <img alt="Yeouido Crisis Trading Floor" class="w-full h-full object-cover filter brightness-75" src="https://lh3.googleusercontent.com/aida/AEtjO1UXtXjgn_fSrhQFcyNn0_G68y2_Ytx4kk7zPtyJFy8z46GUGooZWh-fyHMaRHitWRFncBrvyRKQEHhoTaBQdPIjHsUPR8xU3AcFUOpxkBpYxXQ-SndIC1KERRcfk04cmFtTzLY_t0vd9gJ9QQ-ZrJ1sOI7bq5yL43-2pA1OdQha5WdnWoOjHGVZNYJxQ7UetiB-WSKOZ55nBwV2ouaBPuPtn_zWN_Nh7KuU4LJY1xC2A8BUIMH9D51ogQ">
+                                <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+                                <div class="absolute bottom-1 left-2 font-label-code text-label-code text-on-surface">YEOUIDO LIVE FLOOR TELEMETRY FEED</div>
+                            </div>
+                            <div class="p-space-sm rounded bg-error-container/20">
+                                <span class="font-label-mono text-label-mono text-error uppercase font-bold">NODE 05 &amp; 06: CASCADE &amp; DEBRIEF</span>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">When margin collapses past 30%, algorithmic market orders liquidate your entire portfolio indiscriminately.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Consolidated 1 Forward CTA on Dossier -->
+                    <div class="flex items-center justify-between pt-space-md mt-space-md bg-surface-container-lowest/80 p-space-sm rounded">
+                        <span class="font-label-code text-label-code text-on-surface-variant">SESSION STATE: PRE-SIMULATION // STAGE 01 VERIFIED</span>
+                        <button class="px-space-xl py-space-sm bg-primary-container text-on-primary font-label-mono text-label-mono uppercase tracking-wider rounded font-bold hover:bg-inverse-primary cursor-pointer shadow-lg flex items-center gap-1.5" id="btn-to-rules">
+                            <span>PROCEED TO PHASE BREAKDOWN &amp; SURVIVAL RULES (PART 2) →</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SUB-VIEW 3: 6-PHASE CYCLE & SURVIVAL RULES -->
+                <div class="w-full min-h-[calc(100vh-5.5rem)] flex flex-col justify-between p-space-sm lg:p-space-md relative transition-all duration-300 gap-space-sm hidden" id="view-rules">
+                    <!-- Section Header with Single Back Control -->
+                    <div class="flex items-center justify-between px-space-md py-space-sm bg-surface-container-low rounded border-l-4 border-primary shadow-sm">
+                        <div>
+                            <div class="flex items-center gap-space-xs font-label-code text-label-code text-primary uppercase font-bold tracking-widest">
+                                <span class="material-symbols-outlined text-xs">schema</span>
+                                <span>02. CRISIS TAXONOMY // BEHAVIORAL DEVIATION PROTOCOLS</span>
+                            </div>
+                            <h2 class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight"> THE 6-PHASE CYCLE &amp; SURVIVAL RULES </h2>
+                        </div>
+                        <div class="flex items-center gap-space-sm">
+                            <button class="px-space-md py-1 rounded bg-surface-container hover:bg-surface-container-high font-label-mono text-label-mono text-on-surface-variant uppercase cursor-pointer transition-colors" id="btn-back-dossier"> ← BACK TO DOSSIER </button>
+                            <div class="hidden sm:flex items-center gap-space-xs font-label-code text-label-code text-on-surface-variant bg-surface-container-lowest/90 px-space-sm py-1 rounded">
+                                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                                <span id="phase-badge-tracker">VIEWING: PHASE 01</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 6 Psychological Traps Ribbon -->
+                    <div class="w-full">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-label-code text-label-code text-on-surface-variant uppercase tracking-wider">THE 6 PSYCHOLOGICAL TRAPS OF FORCED LIQUIDATION:</span>
+                            <span class="font-label-code text-label-code text-secondary font-bold">CLICK TO INSPECT TAXONOMY</span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-space-xs" id="phase-button-grid">
+                            <button class="phase-btn p-space-xs sm:p-space-sm rounded text-left transition-all bg-surface-container-high text-secondary border-b-2 border-secondary font-label-mono text-label-mono cursor-pointer" data-phase="1">
+                                <div class="font-label-code text-label-code opacity-70">PHASE 01</div>
+                                <div class="font-bold truncate text-xs sm:text-sm">Hype &amp; FOMO</div>
+                            </button>
+                            <button class="phase-btn p-space-xs sm:p-space-sm rounded text-left transition-all bg-surface-container-low text-on-surface-variant font-label-mono text-label-mono cursor-pointer hover:bg-surface-container" data-phase="2">
+                                <div class="font-label-code text-label-code opacity-70">PHASE 02</div>
+                                <div class="font-bold truncate text-xs sm:text-sm">Overconfidence</div>
+                            </button>
+                            <button class="phase-btn p-space-xs sm:p-space-sm rounded text-left transition-all bg-surface-container-low text-on-surface-variant font-label-mono text-label-mono cursor-pointer hover:bg-surface-container" data-phase="3">
+                                <div class="font-label-code text-label-code opacity-70">PHASE 03</div>
+                                <div class="font-bold truncate text-xs sm:text-sm">Euphoria / Max Debt</div>
+                            </button>
+                            <button class="phase-btn p-space-xs sm:p-space-sm rounded text-left transition-all bg-surface-container-low text-on-surface-variant font-label-mono text-label-mono cursor-pointer hover:bg-surface-container" data-phase="4">
+                                <div class="font-label-code text-label-code opacity-70">PHASE 04</div>
+                                <div class="font-bold truncate text-xs sm:text-sm">Dip &amp; Debt Trap</div>
+                            </button>
+                            <button class="phase-btn p-space-xs sm:p-space-sm rounded text-left transition-all bg-surface-container-low text-on-surface-variant font-label-mono text-label-mono cursor-pointer hover:bg-surface-container" data-phase="5">
+                                <div class="font-label-code text-label-code opacity-70">PHASE 05</div>
+                                <div class="font-bold truncate text-xs sm:text-sm">Violent Bull Trap</div>
+                            </button>
+                            <button class="phase-btn p-space-xs sm:p-space-sm rounded text-left transition-all bg-surface-container-low text-on-surface-variant font-label-mono text-label-mono cursor-pointer hover:bg-surface-container" data-phase="6">
+                                <div class="font-label-code text-label-code text-error opacity-70">PHASE 06</div>
+                                <div class="font-bold truncate text-xs sm:text-sm text-error">Margin Cascade</div>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Dynamic Detail Board & Side Barometers -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-sm flex-1">
+                        <!-- Dynamic Phase Card -->
+                        <div class="lg:col-span-7 bg-surface-container-low/95 backdrop-blur-md p-space-md rounded flex flex-col justify-between shadow-md" id="phase-detail-card">
+                            <div class="space-y-space-xs">
+                                <div class="flex flex-wrap items-center justify-between gap-space-xs pb-space-xs border-b border-surface-variant/40">
+                                    <div class="flex items-center gap-space-xs">
+                                        <span class="font-headline-sm text-headline-sm text-secondary font-bold" id="phase-card-title">PHASE 01: SLIGHT HYPE &amp; FOMO</span>
+                                    </div>
+                                    <span class="px-space-sm py-0.5 rounded font-label-code text-label-code uppercase tracking-wider bg-secondary/15 text-secondary font-bold" id="phase-card-threat">THREAT: LOW / ENTRICING</span>
+                                </div>
+                                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed pt-1" id="phase-card-desc"> The benchmark KOSPI index rallies steadily. Retail forums boast +200% wins on AI chips and battery equities. Pressure builds to leverage cash balances into high-yielding tech products to hedge surging Seoul apartment prices. </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs">
+                                    <div class="p-space-sm bg-surface-container rounded border-l-2 border-secondary">
+                                        <span class="font-label-code text-label-code text-secondary font-bold uppercase">OPTIMAL SURVIVAL PROTOCOL</span>
+                                        <p class="font-body-sm text-body-sm text-on-surface mt-1" id="phase-card-optimal">Establish measured positions, hold minimum 40% unencumbered won liquidity.</p>
+                                    </div>
+                                    <div class="p-space-sm bg-surface-container rounded border-l-2 border-error">
+                                        <span class="font-label-code text-label-code text-error font-bold uppercase">LETHAL BLUNDER TRAP</span>
+                                        <p class="font-body-sm text-body-sm text-on-surface mt-1" id="phase-card-blunder">Deploying maximum 10x margin on late-stage semiconductor breakouts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Live Community Chatter Strip -->
+                            <div class="mt-space-sm p-space-sm bg-surface-container-lowest/80 rounded space-y-1">
+                                <div class="flex items-center justify-between font-label-code text-label-code text-on-surface-variant">
+                                    <span class="flex items-center gap-1 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>LIVE COMMUNITY CHATTER (BLIND / DC INSIDE)</span>
+                                    <span id="phase-card-sentiment">SENTIMENT: GREED 82/100</span>
+                                </div>
+                                <p class="font-body-sm text-body-sm italic text-on-surface" id="phase-card-chatter"> “아파트 가격 또 올랐네... 삼성전자 레버리지 땡겨서 지금 안 사면 평생 영끌도 못한다. 풀매수가 답이다.” </p>
+                            </div>
+                        </div>
+                        <!-- The 3 Fatal Indicators -->
+                        <div class="lg:col-span-5 bg-surface-container-low/95 backdrop-blur-md p-space-md rounded flex flex-col justify-between space-y-space-sm shadow-md">
+                            <div class="flex items-center justify-between pb-space-xs border-b border-surface-variant/40">
+                                <span class="font-label-mono text-label-mono text-primary uppercase font-bold flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm text-primary">speed</span> THE 3 FATAL INDICATORS
+                                </span>
+                                <span class="font-label-code text-label-code text-on-surface-variant">REAL-TIME THRESHOLDS</span>
+                            </div>
+                            <!-- Indicator 1 -->
+                            <div class="p-space-xs sm:p-space-sm bg-surface-container rounded">
+                                <div class="flex justify-between font-label-code text-label-code mb-1">
+                                    <span class="text-on-surface-variant font-bold">01. NET WORTH VS MARGIN DEBT</span>
+                                    <span class="text-secondary font-mono">HEALTHY (1.0 : 0.0)</span>
+                                </div>
+                                <div class="w-full bg-surface-container-lowest h-2 rounded overflow-hidden">
+                                    <div class="bg-secondary h-full w-full"></div>
+                                </div>
+                                <div class="flex justify-between font-label-code text-label-code text-on-surface-variant mt-1">
+                                    <span>Debt Ratio: 0%</span>
+                                    <span>Safe Ceiling: &lt; 50%</span>
+                                </div>
+                            </div>
+                            <!-- Indicator 2 -->
+                            <div class="p-space-xs sm:p-space-sm bg-surface-container rounded">
+                                <div class="flex justify-between font-label-code text-label-code mb-1">
+                                    <span class="text-on-surface-variant font-bold">02. MARGIN HEALTH BAROMETER</span>
+                                    <span class="text-secondary font-mono">100.0% (OPTIMAL)</span>
+                                </div>
+                                <div class="w-full bg-surface-container-lowest h-2 rounded overflow-hidden">
+                                    <div class="bg-secondary h-full w-full"></div>
+                                </div>
+                                <div class="flex justify-between font-label-code text-label-code mt-1">
+                                    <span class="text-tertiary">&lt; 50%: Broker Margin Call</span>
+                                    <span class="text-error font-bold">&lt; 30%: Auto Liquidation</span>
+                                </div>
+                            </div>
+                            <!-- Indicator 3 -->
+                            <div class="p-space-xs sm:p-space-sm bg-surface-container rounded">
+                                <div class="flex justify-between font-label-code text-label-code mb-1">
+                                    <span class="text-on-surface-variant font-bold">03. SEOUL RESIDENTIAL GOAL</span>
+                                    <span class="text-tertiary font-mono">5.55% CAPITALIZED</span>
+                                </div>
+                                <div class="w-full bg-surface-container-lowest h-2 rounded overflow-hidden">
+                                    <div class="bg-primary-container h-full w-[5.55%]"></div>
+                                </div>
+                                <div class="flex justify-between font-label-code text-label-code text-on-surface-variant mt-1">
+                                    <span>Seed: ₩100,000,000</span>
+                                    <span class="text-on-surface">Mapo Apt: ₩1,800,000,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Consolidated 1 Forward CTA on Rules Screen -->
+                    <div class="flex flex-wrap items-center justify-between gap-space-sm px-space-md py-space-sm bg-surface-container-lowest/90 rounded shadow-md">
+                        <div class="flex items-center gap-space-md font-label-code text-label-code text-on-surface-variant">
+                            <span class="text-secondary font-bold">PROTOCOL VERIFIED</span>
+                            <span class="hidden md:inline">•</span>
+                            <span class="hidden md:inline">SYSTEM: KRX SETTLEMENT LATENCY T+0.5</span>
+                        </div>
+                        <button class="px-space-xl py-space-sm bg-secondary-container hover:bg-secondary text-on-secondary-container font-label-mono text-label-mono uppercase tracking-wider rounded font-bold transition-all shadow-lg flex items-center gap-1.5 cursor-pointer" id="btn-proceed-tutorial">
+                            <span>PROCEED TO COCKPIT TUTORIAL →</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- NAVIGATION CONTROLLER SCRIPT -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function switchView(targetId) {
+          // Hide all view panels
+          document.querySelectorAll('#cockpit-viewport > div').forEach(view => {
+            view.classList.add('hidden');
+          });
+
+          // Display selected view panel if exists
+          const targetView = document.getElementById(`view-${targetId}`);
+          if (targetView) {
+            targetView.classList.remove('hidden');
+          }
+
+          // Update active style on top header menu
+          navLinks.forEach(link => {
+            const isMatch = link.getAttribute('data-target') === targetId;
+            if (isMatch) {
+              link.className = 'nav-link px-space-md py-1 tracking-wider uppercase transition-all bg-primary-container text-on-primary-container font-bold rounded';
+              link.setAttribute('aria-current', 'page');
+            } else {
+              link.className = 'nav-link px-space-md py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-mono text-label-mono tracking-wider uppercase transition-all rounded';
+              link.removeAttribute('aria-current');
+            }
+          });
+        }
+
+        // Header Menu click binding
+        navLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = link.getAttribute('data-target');
+            switchView(target);
+          });
+        });
+
+        // CTA buttons click bindings
+        const btnBegin = document.getElementById('btn-begin-crisis');
+        if (btnBegin) btnBegin.addEventListener('click', () => switchView('dossier'));
+
+        const btnToRules = document.getElementById('btn-to-rules');
+        if (btnToRules) btnToRules.addEventListener('click', () => switchView('rules'));
+
+        const btnBackDossier = document.getElementById('btn-back-dossier');
+        if (btnBackDossier) btnBackDossier.addEventListener('click', () => switchView('dossier'));
+
+        const btnDossierBack = document.getElementById('btn-dossier-back');
+        if (btnDossierBack) btnDossierBack.addEventListener('click', () => switchView('title'));
+      });
+    </script>
+</body>
+</html>
